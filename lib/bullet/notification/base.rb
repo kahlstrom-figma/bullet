@@ -3,7 +3,7 @@
 module Bullet
   module Notification
     class Base
-      attr_accessor :notifier, :url
+      attr_accessor :notifier, :url, :count, :duration
       attr_reader :base_class, :associations, :path
 
       def initialize(base_class, association_or_associations, path = nil)
@@ -66,6 +66,8 @@ module Bullet
         hash[:url] = url
         hash[:title] = title
         hash[:body] = body_with_caller
+        hash[:count] = "This query occurred #{count} times during the request"
+        hash[:duration] = "There were #{(duration * 1000).round} ms between the first and last queries"
         hash
       end
 
